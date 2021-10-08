@@ -1,53 +1,50 @@
-package javax.websocket.server;
 import javax.websocket.server.ServerEndpoint;
-import javax.websocket.server.Session;
-import javax.websocket.onOpen;
-import javax.websocket.onClose;
-import javax.websocket.onMessage;
-//import java.util.ArrayList;
-//import java.util.logging.Logger;
-//import java.util.logging.Level;
+import javax.websocket.Session;
+import javax.websocket.OnOpen;
+import javax.websocket.OnClose;
+import javax.websocket.OnMessage;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.logging.Logger;
+import java.util.logging.Level;
 
 @ServerEndpoint("/chat")
 public class ChatServer {
 
-	//private static ArrayList<Session> listOfSessions = new ArrayList<Session>();
-	//private static Logger logger = Logger.getLogger(ChatServer.class.getName());
+	private static ArrayList<Session> listOfSessions = new ArrayList<Session>();
+	private static Logger logger = Logger.getLogger(ChatServer.class.getName());
 
-	/*
-	@onOpen
+	@OnOpen
 	public void onOpen(Session session) throws IOException {
-		this.logger.log(LEVEL.INFO, "opening session with ID = ", session.getId());
+		this.logger.log(Level.INFO, "opening session with ID = ", session.getId());
 	
 		this.listOfSessions.add(session);
 	}
 	
-	@onClose
+	@OnClose
 	public void onClose(Session session) throws IOException {
 		//, session.getId()
-		this.logger.log(LEVEL.INFO, "closing session with ID = ");
+		this.logger.log(Level.INFO, "closing session with ID = ");
 		
 		this.listOfSessions.remove(session);
 	
 	}
 	
-	@onMessage
-	public void onMessage(Session session, Message message) throws IOException {
+	@OnMessage
+	public void onMessage(String message, Session session) throws IOException {
 		//session.getId()
-		this.logger.log(LEVEL.INFO, "receiving message from session with ID = ");
+		this.logger.log(Level.INFO, "receiving message from session with ID = ");
 		//message.getContent()
-		this.logger.log(LEVEL.INFO, "message content = ");
+		this.logger.log(Level.INFO, "message content = ");
 		
-		for (Session session : this.listOfSessions) {
+		for (Session sess : this.listOfSessions) {
 		
-			this.logger.log(LEVEL.INFO, "sending to session with ID = ", session.getId());
-			session.getBasicRemote().sendText(message);
+			this.logger.log(Level.INFO, "sending to session with ID = ", sess.getId());
+			sess.getBasicRemote().sendText(message);
 		
 		}
 	
 	
 	}
-	*/
-	
 
 }
