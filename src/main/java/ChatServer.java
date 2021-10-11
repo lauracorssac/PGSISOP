@@ -16,15 +16,15 @@ public class ChatServer {
 
 	@OnOpen
 	public void onOpen(Session session) throws IOException {
-		this.logger.log(Level.INFO, "opening session with ID = ", session.getId());
+		
+		this.logger.log(Level.INFO, "opening session with ID = " + session.getId());
 	
 		this.listOfSessions.add(session);
 	}
 	
 	@OnClose
 	public void onClose(Session session) throws IOException {
-		//, session.getId()
-		this.logger.log(Level.INFO, "closing session with ID = ");
+		this.logger.log(Level.INFO, "closing session with ID = " + session.getId());
 		
 		this.listOfSessions.remove(session);
 	
@@ -32,14 +32,11 @@ public class ChatServer {
 	
 	@OnMessage
 	public void onMessage(String message, Session session) throws IOException {
-		//session.getId()
-		this.logger.log(Level.INFO, "receiving message from session with ID = ");
-		//message.getContent()
-		this.logger.log(Level.INFO, "message content = ");
+		this.logger.log(Level.INFO, "receiving " + message + " from session with ID = " + session.getId());
 		
 		for (Session sess : this.listOfSessions) {
 		
-			this.logger.log(Level.INFO, "sending to session with ID = ", sess.getId());
+			this.logger.log(Level.INFO, "sending to session with ID = " + sess.getId());
 			sess.getBasicRemote().sendText(message);
 		
 		}
